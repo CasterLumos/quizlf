@@ -1,76 +1,93 @@
-import React from "react";
-import { useRouter } from "next/router";
+/* eslint-disable jsx-a11y/label-has-associated-control */
+/* eslint-disable func-names */
+import React from 'react';
+import { useRouter } from 'next/router';
 
-import styled from "styled-components";
-import Head from "next/head";
+import styled from 'styled-components';
+import Head from 'next/head';
+import Widget from '../components/Widget';
+import QuizLogo from '../components/QuizLogo';
+import QuizBackground from '../components/QuizBackground';
+import Footer from '../components/Footer';
+import GitHubCorner from '../components/GitHubCorner';
 
-import theme from "../theme/theme";
-import Widget from "../components/Widget";
-import QuizLogo from "../components/QuizLogo";
-import QuizBackground from "../components/QuizBackground";
-import Footer from "../components/Footer";
-import GitHubCorner from "../components/GitHubCorner";
-
-// const BackgroundImage = styled.div`
-//   background-image: url(${theme.background.image});
-//   flex: 1;
-//   background-size: cover;
-//   background-position: center;
-// `;
 export const QuizContainer = styled.div`
-  width: 100%;
+  width: 100vw;
   max-width: 350px;
-  padding-top: 45px;
   margin: auto 10%;
   @media screen and (max-width: 500px) {
     margin: auto;
-    padding: 15px;
   }
 `;
 export default function Home() {
+  const router = useRouter();
+  const [name, setName] = React.useState('');
+
   return (
-    <QuizBackground>
-      <Head>
-        <title>AluraQuiz - Modelo Base</title>
-      </Head>
-      <QuizContainer>
-        <QuizLogo />
-        <Widget>
-          <Widget.Header>
-            <h1>The legend of zelda</h1>
-          </Widget.Header>
-          <Widget.Content>
-            <form
-              onSubmit={function (infosDoEvento) {
-                infosDoEvento.preventDefault();
-                router.push(`/quiz?name=`);
-                console.log("Fazendo uma submissão por meio do react");
-              }}
-            >
-              <input
-                onChange={function (infosDoEvento) {
-                  console.log(infosDoEvento.target.value);
-                  // State
-                  // name = infosDoEvento.target.value;
-                  setName(infosDoEvento.target.value);
+    <>
+      <QuizBackground>
+        <Head>
+          <title>LackingFaces Quiz</title>
+        </Head>
+        <div className="div-one" />
+        <div className="div-two" />
+        <QuizContainer>
+          <QuizLogo />
+          <Widget>
+            <Widget.Header>
+              <h1>Florestas no Brasil</h1>
+            </Widget.Header>
+            <Widget.Content>
+              <p>
+                Você sabia que o Brasil tem florestas ricas e variadas, que
+                proporcionam incríveis experiências de ecoturismo, passeios de
+                contemplação da natureza e até esportes de aventura?
+              </p>
+              <form
+                onSubmit={function (infosDoEvento) {
+                  infosDoEvento.preventDefault();
+                  router.push(`/quiz?name=${name}`);
                 }}
-                placeholder="Diz ai seu nome"
-              />
-              <button type="submit">Jogar</button>
-            </form>
-          </Widget.Content>
-        </Widget>
+              >
+                <input
+                  pattern="[A-Za-z0-9._%+-]+@[A-Za-z0-9.-]+\.[A-Za-z]{1,63}$"
+                  onChange={function (infosDoEvento) {
+                    setName(infosDoEvento.target.value);
+                  }}
+                  placeholder="Nickname"
+                />
+                <div>
+                  <button
+                    type="submit"
+                    className="c-form__button"
+                    disabled={name.length === 0}
+                  >
+                    Jogar como:
+                    {' '}
+                    {name}
+                  </button>
+                </div>
+              </form>
+            </Widget.Content>
+          </Widget>
 
-        <Widget>
-          <Widget.Content>
-            <h1>Quizes da Galera</h1>
-
-            <p>lorem ipsum dolor sit amet...</p>
-          </Widget.Content>
-        </Widget>
-        <Footer />
-      </QuizContainer>
-      <GitHubCorner projectUrl="https://github.com/omariosouto" />
-    </QuizBackground>
+          <Widget>
+            <Widget.Header>
+              <h1>Quizes da Galera</h1>
+            </Widget.Header>
+            <Widget.Content>
+              <p>
+                Lorem ipsum dolor sit amet consectetur adipisicing elit. Tempore
+                libero velit, enim maxime dicta repellendus iure, quisquam
+                voluptatum amet ipsam iusto, maiores incidunt inventore fugiat.
+                Commodi delectus doloribus excepturi. Ut!.
+              </p>
+            </Widget.Content>
+          </Widget>
+        </QuizContainer>
+        <GitHubCorner projectUrl="https://github.com/CasterLumos/quizlf" />
+      </QuizBackground>
+      <Footer />
+    </>
   );
 }

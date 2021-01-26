@@ -1,27 +1,22 @@
-import styled from "styled-components";
-import theme from "../../theme/theme";
+import React from 'react';
+import styled from 'styled-components';
+import theme from '../../theme/theme';
 
 const FooterWrapper = styled.footer`
+  width: 100%;
+  height: auto;
+  bottom: 0;
+  margin-top: 0;
+  min-width: 100%;
+  font-size: 1em;
   background-color: ${theme.palette.primary.black};
-  padding: 20px;
-  display: flex;
-  align-items: center;
-  border-radius: 4px;
-  img {
-    width: 58px;
-    margin-right: 23px;
-  }
-  a {
-    color: ${theme.palette.primary.white};
+  color: ${theme.palette.primary.white};
+  font-family: Staatliches;
+  text-align: center;
+  font-style: italic;
+  a{
     text-decoration: none;
-    transition: 0.3s;
-    &:hover,
-    &:focus {
-      opacity: 0.5;
-    }
-    span {
-      text-decoration: underline;
-    }
+  color: ${theme.palette.primary.white};
   }
 `;
 
@@ -29,14 +24,9 @@ export default function Footer(props) {
   return (
     // eslint-disable-next-line react/jsx-props-no-spreading
     <FooterWrapper {...props}>
-      <a href="https://www.alura.com.br/">
-        <img
-          src="https://www.alura.com.br/assets/img/alura-logo-white.1570550707.svg"
-          alt="Logo Alura"
-        />
-      </a>
       <p>
-        Orgulhosamente criado durante a{" "}
+        Orgulhosamente criado durante a
+        {' '}
         <a href="https://www.alura.com.br/">
           <span>Imersão React da Alura</span>
         </a>
